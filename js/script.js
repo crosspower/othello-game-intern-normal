@@ -20,7 +20,7 @@ function start_game() {
     // click イベント
     for (let row = 0; row < 8; row++) {
         for (let col = 0; col < 8; col++) {
-            target_piece(0, 0).addEventListener(
+            target_piece(row, col).addEventListener(
                 "click", () => alert("test")
             );
         }

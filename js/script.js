@@ -85,7 +85,7 @@ function turn_piece_check(count, basis_position, direction) {
     }
     if (next_piece_color == "none") {
         // 処理を追加
-    } else if (next_piece_color == whitch_turn){
+    } else if (next_piece_color == which_turn){
         // 処理を追加
     } else {
         // 処理を追加

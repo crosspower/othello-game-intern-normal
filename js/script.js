@@ -42,8 +42,8 @@ function create_board() {
             td.appendChild(div);
             tr.appendChild(td);
         }
+        document.getElementById("board").appendChild(tr);
     }
-    document.getElementById("board").appendChild(tr);
 }
 
 // 駒を置く

@@ -58,7 +58,7 @@ function put_piece(row, col, check) {
 // 駒を返す
 function turn_over(row_basis, col_basis, check) {
     var reverse_count = 0;
-    var basis_position = [row_basis, col_basis];
+
     for (let x = -1; x <= 1; x++) {
         for (let y = -1; y <= 1; y++) {
             if (x == 0 && y == 0) continue;

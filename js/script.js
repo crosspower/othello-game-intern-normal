@@ -1,6 +1,6 @@
 var which_turn = "black";
 
-// 駒を指定する
+// 駒を指定する関数
 function target_piece(x, y) {
     try {
         var result = document.getElementById(x + "," + y);
@@ -10,7 +10,7 @@ function target_piece(x, y) {
     return result;
 }
 
-// index.html から呼ばれる
+// index.html から呼ばれる関数
 function start_game() {
     // 盤面を作成する
     create_board()
@@ -27,7 +27,7 @@ function start_game() {
     }
 }
 
-// 盤面を作成する
+// 盤面を作成する関数
 function create_board() {
     for (let row = 0; row < 1; row++) {
         var tr = document.createElement("tr");
@@ -46,7 +46,7 @@ function create_board() {
     }
 }
 
-// 駒を置く
+// 駒を置く関数
 function put_piece(row, col, check) {
     if (check) {
         target_piece(row, col).className = which_turn;
@@ -55,46 +55,52 @@ function put_piece(row, col, check) {
     }
 }
 
-// 駒を返す
+//周囲8方向の駒を裏返し、その合計駒数を返す関数
 function turn_over(row_basis, col_basis, check) {
-    var reverse_count = 0;
-
+    var sum_reverse_count = 0;
     for (let x = -1; x <= 1; x++) {
-        for (let y = -1; y <= 1; y++) {
-            if (x == 0 && y == 0) continue;
-            var direction = [x, y];
-            var count = 1; // 仮の値
-            reverse_count += count;
+        for (let y = -1; y <= 1; y++) {
+            // 置いた場所なので処理しない
+            if (x == 0 && y == 0) { continue; }
+	     
+            var reverse_count = 1; // 仮の値で1を指定
+	     
             if (check) {
-                for (let i = 1; i <= count; i++) {
+                for (let i = 1; i <= reverse_count; i++) {
                     var turn_piece = target_piece(row_basis + x * i, col_basis + y * i);
                     turn_piece.className = which_turn;
                 }
             }
+	     sum_reverse_count += reverse_count; // 裏返した駒の合計数に追加
         }
-    } return reverse_count;
+    }
+    return sum_reverse_count;
 }
 
-// 駒を返すチェックを行う
-function turn_piece_check(count, basis_position, direction) {
+// 1方向で何枚裏返せるかを数える関数
+function turn_piece_check(count, current_row, current_col, direction) {
     try {
-        var next_position = [basis_position[0] + direction[0], basis_position[1] + direction[1]];
-        var next_piece_color = target_piece(next_position[0], next_position[1]).className;
+        var next_row = current_row + direction[0];
+        var next_col = current_col + direction[1];
+        var next_piece_color = target_piece(next_row, next_col).className;    
     } catch {
-        // 処理を追加
-    }
+        // ここに処理を書く  
+    }    
+    
     if (next_piece_color == "none") {
-        // 処理を追加
-    } else if (next_piece_color == which_turn){
-        // 処理を追加
-    } else {
-        // 処理を追加
+        // ここに処理を書く    
     }
+    if (next_piece_color == which_turn) {
+        // ここに処理を書く    
+    }
+    // ここに処理を書く   
+        
     return count;
 }
+
         
 
-// 合計の駒数を数える
+// 合計の駒数を数える関数
 function total_piece_count() {
     var black_count = 0;
     var white_count = 0;
@@ -115,7 +121,7 @@ function total_piece_count() {
 }
 
 
-// 駒の置ける場所を数える
+// 駒の置ける場所を数える関数
 function count_places() {
     var places = [];
     for (let row = 0; row < 8; row++) {
@@ -134,7 +140,7 @@ function count_places() {
 }
 
 
-// 手番を替える
+// 手番を替える関数
 function change_turn() {
     var black_result = document.getElementById("black-result");
     var white_result = document.getElementById("white-result");
